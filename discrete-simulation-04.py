@@ -9,6 +9,11 @@ class Carro:
         
     def run(self):
         while True:
-            yield self.env.process(self.frequencia)
-            print('Carro passou em', self.env.now)
+            yield self.env.timeout(self.frequencia)
+            print('Carro passou em ', self.env.now)
             
+#Declarou na variavel o env do ambiente        
+env = simpy.Environment()
+#Instancia o objeto pessoa com a variavel env'
+p = Carro(env)
+env.run(until = 50) #como é um loop infinito é bom colocar um delimitador para o tempo
